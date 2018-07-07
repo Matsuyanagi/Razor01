@@ -1,1 +1,25 @@
-"Hello @Model.Name, welcome to RazorEngine! by file";
+@using System.Text.RegularExpressions;
+Hello @(Model.Name), welcome to RazorEngine! from file.
+
+@*
+    razor text comment
+*@
+@{
+	for( int i = 0; i < 10; i++ ){
+		<text>no : @i</text>
+	}
+}
+
+---- ----
+@for( int j = 0; j < 10; j++ ){
+	
+	if ( j == 0 ){
+		<text>zero</text>
+	}else if ( ( j & 1 ) == 0 ){
+		<text>even : j = @j</text>
+	}else{
+		<text>odd  : j = @j</text>
+	}
+}
+---- ----
+
