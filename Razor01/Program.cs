@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -8,6 +9,7 @@ using System.Security.Permissions;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using Codeplex.Data;
 using RazorEngine;
 using RazorEngine.Configuration;
 using RazorEngine.Templating;
@@ -16,9 +18,8 @@ namespace Razor01
 {
 	class Program
 	{
-		static int Main(string[] args)
+		static int Main( string[] args )
 		{
-
 			if ( AppDomain.CurrentDomain.IsDefaultAppDomain() ) {
 				// RazorEngine cannot clean up from the default appdomain...
 				// Console.WriteLine( "Switching to secound AppDomain, for RazorEngine..." );
@@ -38,17 +39,23 @@ namespace Razor01
 				return exitCode;
 			}
 
-			var config = new TemplateServiceConfiguration();
-			config.Debug = true;
+			var filenameInputJson = "sample/defines.json";
+			var defineJsonText = File.ReadAllText( filenameInputJson );
+			var defines = DynamicJson.Parse( defineJsonText );
 
-			var service = RazorEngineService.Create(config);
+			var config = new TemplateServiceConfiguration
+			{
+				Debug = true
+			};
+
+			var service = RazorEngineService.Create( config );
 			var result = "";
-			
+
 			string templateFile = "sample/sample.cshtml";
 			var template = new LoadedTemplateSource( File.ReadAllText( templateFile ), templateFile );
-            result =
-            	Engine.Razor.RunCompile( template, "templateKey1", null, new { Name = "World" });
-            
+			result =
+				service.RunCompile( template, "templateKey1", typeof( DynamicObject ), ( object ) defines );
+
 
 			Console.WriteLine( result );
 

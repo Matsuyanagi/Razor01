@@ -1,25 +1,25 @@
 @using System.Text.RegularExpressions;
 Hello @(Model.Name), welcome to RazorEngine! from file.
-
 @*
     razor text comment
+	[C# Razor構文 基礎文法 総まとめ - ＠IT](http://www.atmarkit.co.jp/fdotnet/rapidmaster/rapidmaster_03/rapidmaster_03.html)
+	[ASP.NET Core の Razor 構文リファレンス | Microsoft Docs](https://docs.microsoft.com/ja-jp/aspnet/core/mvc/views/razor?view=aspnetcore-2.1)
+	[チュートリアル: Visual Studio での Razor 構文を使用した Web サイトの作成](https://msdn.microsoft.com/ja-jp/library/gg606533(v=vs.100).aspx)
+
 *@
 @{
-	for( int i = 0; i < 10; i++ ){
+	for( int i = 0; i < 5; i++ ){
 		<text>no : @i</text>
 	}
 }
-
 ---- ----
 @for( int j = 0; j < 10; j++ ){
-	
 	if ( j == 0 ){
-		<text>zero</text>
+		@:zero
 	}else if ( ( j & 1 ) == 0 ){
-		<text>even : j = @j</text>
+<text>even : j = @j</text>
 	}else{
 		<text>odd  : j = @j</text>
 	}
 }
 ---- ----
-
