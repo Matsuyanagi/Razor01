@@ -38,23 +38,17 @@ namespace Razor01
 				return exitCode;
 			}
 
-			// Continue with your code.
-//			string template = "Hello @Model.Name, welcome to RazorEngine! by string";
-/* 			var result =
-				Engine.Razor.RunCompile( template, "templateKey", null, new { Name = "World" } );
- */
 			var config = new TemplateServiceConfiguration();
 			config.Debug = true;
-			// .. configure your instance
 
 			var service = RazorEngineService.Create(config);
 			var result = "";
-			// string template = "Hello @Model.Name, welcome to RazorEngine!";
+			
 			string templateFile = "sample/sample.cshtml";
 			var template = new LoadedTemplateSource( File.ReadAllText( templateFile ), templateFile );
             result =
             	Engine.Razor.RunCompile( template, "templateKey1", null, new { Name = "World" });
-            // result = service.RunCompile(template, "templateKey", null, new { Name = "World" });
+            
 
 			Console.WriteLine( result );
 
