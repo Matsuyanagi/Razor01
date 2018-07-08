@@ -13,6 +13,7 @@ using Codeplex.Data;
 using RazorEngine;
 using RazorEngine.Configuration;
 using RazorEngine.Templating;
+using RazorEngine.Text;
 
 namespace Razor01
 {
@@ -45,7 +46,8 @@ namespace Razor01
 
 			var config = new TemplateServiceConfiguration
 			{
-				Debug = true
+				Debug = true,
+				EncodedStringFactory = new RawStringFactory()		// 出力で HTML エンコードを行わない '>' '<' などをそのまま出力する。デフォルトでは html エンコード '>' -> '&gt;' として出力される
 			};
 
 			var service = RazorEngineService.Create( config );
